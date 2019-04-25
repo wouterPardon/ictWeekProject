@@ -6,10 +6,16 @@ let zoomLvl = 15;
 
 function init() {
     createMap();
-    
-    let data = '[{"coords":{"lat": "50.665901", "lon": "4.612952"}, "date": "2019-04-25 10:45"}, {"coords":{"lat": "50.665901", "lon": "4.612952"}, "date": "2019-04-25 10:30"}]';
 
-    displayData(JSON.parse(data));
+    fetch('')
+    .then(function(response) {
+      return response.json();
+    })
+    .then(function(myJson) {
+        displayData(myJson)
+    });
+    
+    let data = '[{"coords":{"lat": "50.665901", "lon": "4.612952"}, "date": "2019-04-25 10:45"}, {"coords":{"lat": "50.68", "lon": "4.59"}, "date": "2019-04-25 10:30"}]';
 }
 
 function createMap() {
@@ -24,11 +30,11 @@ function createMap() {
 }
 
 function displayData(data) {
-    for (let i = data.length; i > 0; i--) {
-        marker = addMarker(data[i].coords, "Seen on " + data[i].date)
+    for (let i = data.length -1; i >= 0; i--) {
+        marker = addMarker(data[i]["coords"], "Seen on " + data[i]["date"])
     }
 
-    map.setView(data[0]);
+    map.setView(data[0]["coords"]);
 }
 
 function addMarker({lat, lon}, message) {
