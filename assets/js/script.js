@@ -1,8 +1,10 @@
 document.addEventListener("DOMContentLoaded", init);
+
 let map;
+let LouvainLaNeuve = [50.667656, 4.614325];
 
 function init() {
-    map = L.map('mapid').setView([50.667656, 4.614325], 13);
+    map = L.map('mapid').setView(LouvainLaNeuve, 13);
 
     L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
                 attribution: 'Made by Group 5',
@@ -11,7 +13,17 @@ function init() {
                 accessToken: 'pk.eyJ1Ijoid291dGVycGFyZG9uIiwiYSI6ImNqdXdjM2ZtbzA1MmgzeXBnMzBhMHZiMmMifQ.s1ZmAn_KOd9X3Hlm2b1z_g'
             }).addTo(map);
 
-    let marker = addMarker({lat:50.667656, lon:4.614325}, "Last known location (2019-04-25 10:15)")
+    let data = [{coords:{lat:50.68, lon:4.62}, datetime:"2019-04-05 10:30"},{coords:{lat:50.59, lon:4.60}, datetime:"2019-04-05 10:25"}]
+
+    displayData(data);
+}
+
+function displayData(data) {
+    for (let i = data.length; i > 0; i--) {
+        marker = addMarker(data[i].coords, "Seen on " + data[i].datetime)
+    }
+
+    map.setView(data[0]);
 }
 
 function addMarker({lat, lon}, message) {
