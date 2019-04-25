@@ -1,13 +1,20 @@
 document.addEventListener("DOMContentLoaded", init);
+let map;
 
 function init() {
-    var mymap = L.map('mapid').setView([51.505, -0.09], 13);
-            L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
-                attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+    map = L.map('mapid').setView([50.667656, 4.614325], 13);
+
+    L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+                attribution: 'Made by Group 5',
                 maxZoom: 18,
                 id: 'mapbox.streets',
                 accessToken: 'pk.eyJ1Ijoid291dGVycGFyZG9uIiwiYSI6ImNqdXdjM2ZtbzA1MmgzeXBnMzBhMHZiMmMifQ.s1ZmAn_KOd9X3Hlm2b1z_g'
-            }).addTo(mymap);
+            }).addTo(map);
 
-    var marker = L.marker([51.5, -0.09]).addTo(mymap);
+    let marker = addMarker({lat:50.667656, lon:4.614325}, "Last known location (2019-04-25 10:15)")
+}
+
+function addMarker({lat, lon}, message) {
+    let marker = L.marker([lat, lon]).addTo(map);
+    marker.bindPopup(message);
 }
