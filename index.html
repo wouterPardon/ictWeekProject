@@ -25,10 +25,10 @@
       </div>
 
     <script>
-            let coordinatesJson = '[{"longitude": "50.665901", "latitude": "4.612952", "value": "Animal co 50.665901, 4.612952"}, {"longitude": "50.665901", "latitude": "4.512952", "value": "Animal co 50.665901, 4.512952"}]';
+            let coordinatesJson = '[{"longitude": "50.665901", "latitude": "4.612952", "value": "Animal co 50.665901, 4.612952"}, {"longitude": "50.665901", "latitude": "4.622952", "value": "Animal co 50.665901, 4.612962"}, {"longitude": "50.660001", "latitude": "4.622952", "value": "Animal co 50.660001, 4.612962"}]';
             var coordinates = JSON.parse(coordinatesJson);
 
-            let mymap = L.map('mapid').setView([50.665901, 4.612952], 13);
+            let mymap = L.map('mapid').setView([50.665901, 4.612952], 15);
             L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
                 attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
                 maxZoom: 18,
@@ -40,6 +40,16 @@
                 let marker = L.marker([coordinates[i]['longitude'], coordinates[i]['latitude']]).addTo(mymap);
                 marker.bindPopup(coordinates[i]['value']).openPopup();
             }
+            /*
+            fetch('')
+            .then(function(response) {
+              console.log(response);
+              return response.json();
+            })
+            .then(function(myJson) {
+              console.log(JSON.stringify(myJson));
+            });
+            */
 
             console.log(mymap);
     </script>
